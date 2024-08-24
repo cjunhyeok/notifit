@@ -1,8 +1,8 @@
-package com.notifit.domain.workoutset.entity;
+package com.notifit.entity.workoutset;
 
-import com.notifit.domain.workout.entity.Workout;
-import com.notifit.domain.workout.entity.enums.BodyPart;
-import com.notifit.domain.workoutset.entity.enums.Unit;
+import com.notifit.entity.workout.Workout;
+import com.notifit.entity.workout.enums.BodyPart;
+import com.notifit.entity.workoutset.enums.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

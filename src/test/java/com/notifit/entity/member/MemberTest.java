@@ -1,7 +1,7 @@
-package com.notifit.domain.member.entity;
+package com.notifit.entity.member;
 
-import com.notifit.global.exception.CustomException;
-import com.notifit.global.exception.ErrorCode;
+import com.notifit.exception.CustomException;
+import com.notifit.exception.ErrorCode;
 import org.assertj.core.api.AbstractObjectAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

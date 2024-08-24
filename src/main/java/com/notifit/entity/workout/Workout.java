@@ -1,6 +1,6 @@
-package com.notifit.domain.workout.entity;
+package com.notifit.entity.workout;
 
-import com.notifit.domain.workout.entity.enums.BodyPart;
+import com.notifit.entity.workout.enums.BodyPart;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

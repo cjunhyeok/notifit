@@ -1,4 +1,4 @@
-package com.notifit.domain.workout.entity.enums;
+package com.notifit.entity.workout.enums;
 
 public enum BodyPart {
 

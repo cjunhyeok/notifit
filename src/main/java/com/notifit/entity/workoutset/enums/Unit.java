@@ -1,4 +1,4 @@
-package com.notifit.domain.workoutset.entity.enums;
+package com.notifit.entity.workoutset.enums;
 
 public enum Unit {
 

@@ -1,4 +1,4 @@
-package com.notifit.global.exception;
+package com.notifit.exception;
 
 import lombok.Getter;
 
