@@ -14,7 +14,7 @@ public class WorkoutSet {
 
     @Id
     @GeneratedValue
-    @Column(name = "workout_detail_id")
+    @Column(name = "workout_set_id")
     private Long id;
 
     private int setNumber;
