@@ -21,13 +21,15 @@ class MemberTest {
         String phoneNumber = "phoneNumber";
 
         // when
-        Member member = Member.of(username, password, name, phoneNumber);
+        Member member = Member.of(username, password, name, phoneNumber, true, true);
 
         // then
         assertThat(member.getUsername()).isEqualTo(username);
         assertThat(member.getPassword()).isEqualTo(password);
         assertThat(member.getName()).isEqualTo(name);
         assertThat(member.getPhoneNumber()).isEqualTo(phoneNumber);
+        assertThat(member.isTermOfUseCheck()).isTrue();
+        assertThat(member.isPrivacyCheck()).isTrue();
     }
 
     @Test
@@ -40,7 +42,7 @@ class MemberTest {
 
         // when
         AbstractObjectAssert<?, CustomException> extracting = assertThatThrownBy(
-                () -> Member.of(null, password, name, phoneNumber))
+                () -> Member.of(null, password, name, phoneNumber, true, true))
                 .isInstanceOf(CustomException.class)
                 .extracting(ex -> (CustomException) ex);
 

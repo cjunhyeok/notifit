@@ -27,7 +27,7 @@ class WorkoutPlanTest {
         String password = "password";
         String name = "name";
         String phoneNumber = "phoneNumber";
-        Member member = Member.of(username, password, name, phoneNumber);
+        Member member = Member.of(username, password, name, phoneNumber, true, true);
 
         BodyPart bodyPart = BodyPart.BACK;
         String workoutName = "benchPress";
