@@ -25,7 +25,10 @@ public class Member {
     private String name;
     private String phoneNumber;
 
-    private Member(String username, String password, String name, String phoneNumber) {
+    private boolean isTermOfUseCheck;
+    private boolean isPrivacyCheck;
+
+    private Member(String username, String password, String name, String phoneNumber, boolean isTermOfUseCheck, boolean isPrivacyCheck) {
 
         if (username == null || username.isEmpty()) {
             throw new CustomException(ErrorCode.EMPTY_USERNAME);
@@ -35,13 +38,17 @@ public class Member {
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.isTermOfUseCheck = isTermOfUseCheck;
+        this.isPrivacyCheck = isPrivacyCheck;
     }
 
-    public static Member of(String username, String password, String name, String phoneNumber) {
+    public static Member of(String username, String password, String name, String phoneNumber, boolean isTermOfUseCheck, boolean isPrivacyCheck) {
         return new Member(
                 username,
                 password,
                 name,
-                phoneNumber);
+                phoneNumber,
+                isTermOfUseCheck,
+                isPrivacyCheck);
     }
 }
