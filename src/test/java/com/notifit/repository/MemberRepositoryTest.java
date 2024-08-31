@@ -80,7 +80,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    @DisplayName("회원 ID 에 맞는 회원 정보가 없을 시 Optional null 을 반환한다.")
+    @DisplayName("회원 ID 에 맞는 회원 정보가 없을 시 Optional 이 비어있다.")
     void findByUsernameNotFoundTest() {
         // given
         String username = "username";
@@ -89,7 +89,7 @@ class MemberRepositoryTest {
         Optional<Member> findMemberOptional = memberRepository.findByUsername(username);
 
         // then
-        assertThat(findMemberOptional.isPresent()).isFalse();
+        assertThat(findMemberOptional.isEmpty()).isTrue();
     }
 
     private Member createMember(String username, String name, String phoneNumber) {
