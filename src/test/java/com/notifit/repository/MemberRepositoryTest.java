@@ -1,6 +1,8 @@
 package com.notifit.repository;
 
 import com.notifit.entity.member.Member;
+import com.notifit.exception.CustomException;
+import com.notifit.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,25 @@ class MemberRepositoryTest {
         // then
         assertThat(isDuplicated).isTrue();
         assertThat(isExist).isFalse();
+    }
+
+    @Test
+    @DisplayName("사용자 ID 를 이용해 회원 정보를 조회한다.")
+    void findByUsernameTest() {
+        // given
+        String username = "username";
+        String name = "name";
+        String phoneNumber = "phoneNumber";
+        Member member = createMember(username, name, phoneNumber);
+        memberRepository.save(member);
+
+        // when
+        Member findMember = memberRepository.findByUsername(username).orElseThrow(
+                () -> new CustomException(ErrorCode.EMPTY_USERNAME)
+        );
+
+        // then
+        assertThat(findMember.getId()).isNotNull();
     }
 
     private Member createMember(String username, String name, String phoneNumber) {
