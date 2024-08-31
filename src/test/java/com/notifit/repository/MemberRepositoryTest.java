@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.*;
 
 @Transactional
@@ -75,6 +77,19 @@ class MemberRepositoryTest {
 
         // then
         assertThat(findMember.getId()).isNotNull();
+    }
+
+    @Test
+    @DisplayName("회원 ID 에 맞는 회원 정보가 없을 시 Optional null 을 반환한다.")
+    void findByUsernameNotFoundTest() {
+        // given
+        String username = "username";
+
+        // when
+        Optional<Member> findMemberOptional = memberRepository.findByUsername(username);
+
+        // then
+        assertThat(findMemberOptional.isPresent()).isFalse();
     }
 
     private Member createMember(String username, String name, String phoneNumber) {
