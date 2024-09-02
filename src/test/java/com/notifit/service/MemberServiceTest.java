@@ -1,6 +1,7 @@
 package com.notifit.service;
 
 import com.notifit.controller.dtos.member.JoinRequest;
+import com.notifit.controller.dtos.member.LoginRequest;
 import com.notifit.entity.member.Member;
 import com.notifit.exception.CustomException;
 import com.notifit.exception.ErrorCode;
@@ -54,6 +55,27 @@ public class MemberServiceTest {
         extracting.satisfies(ex -> {
             assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.DUPLICATED_USERNAME);
         });
+    }
+
+    @Test
+    @DisplayName("사용자 ID 비밀번호를 이용해 로그인을 진행한다.")
+    void loginTest() {
+        // given
+        String username = "username";
+        String password = "password";
+        JoinRequest request = createJoinRequest(username, password);
+        memberService.join(request);
+        LoginRequest loginRequest = LoginRequest
+                .builder()
+                .username(username)
+                .password(password)
+                .build();
+
+        // when
+        String sessionId = memberService.login(loginRequest);
+
+        // then
+        assertThat(sessionId).isNotNull();
     }
 
     private JoinRequest createJoinRequest(String username, String password) {
