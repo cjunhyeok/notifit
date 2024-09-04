@@ -1,7 +1,6 @@
 package com.notifit.entity.workoutroutine;
 
 import com.notifit.entity.member.Member;
-import com.notifit.entity.workoutset.WorkoutSet;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,23 +25,17 @@ public class WorkoutRoutine {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "workout_set_id")
-    private WorkoutSet workoutSet;
-
-    public WorkoutRoutine(String routineName, LocalDateTime lastWorkoutTime, Member member, WorkoutSet workoutSet) {
+    public WorkoutRoutine(String routineName, LocalDateTime lastWorkoutTime, Member member) {
         this.routineName = routineName;
         this.lastWorkoutTime = lastWorkoutTime;
         this.member = member;
-        this.workoutSet = workoutSet;
     }
 
-    public static WorkoutRoutine of (String routineName, LocalDateTime lastWorkoutTime, Member member, WorkoutSet workoutSet) {
+    public static WorkoutRoutine of (String routineName, LocalDateTime lastWorkoutTime, Member member) {
         return new WorkoutRoutine(
                 routineName,
                 lastWorkoutTime,
-                member,
-                workoutSet
+                member
         );
     }
 }
