@@ -1,6 +1,6 @@
 package com.notifit.entity.planset;
 
-import com.notifit.entity.workoutroutine.WorkoutRoutine;
+import com.notifit.entity.workoutplan.WorkoutPlan;
 import com.notifit.entity.workoutset.WorkoutSet;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -18,19 +18,19 @@ public class PlanSet {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "workout_routine_id")
-    private WorkoutRoutine workoutRoutine;
+    @JoinColumn(name = "workout_plan_id")
+    private WorkoutPlan workoutPlan;
 
     @ManyToOne
     @JoinColumn(name = "workout_set_id")
     private WorkoutSet workoutSet;
 
-    private PlanSet(WorkoutRoutine workoutRoutine, WorkoutSet workoutSet) {
-        this.workoutRoutine = workoutRoutine;
+    private PlanSet(WorkoutPlan workoutPlan, WorkoutSet workoutSet) {
+        this.workoutPlan = workoutPlan;
         this.workoutSet = workoutSet;
     }
 
-    public PlanSet of(WorkoutRoutine workoutRoutine, WorkoutSet workoutSet) {
-        return new PlanSet(workoutRoutine,  workoutSet);
+    public PlanSet of(WorkoutPlan workoutPlan, WorkoutSet workoutSet) {
+        return new PlanSet(workoutPlan,  workoutSet);
     }
 }
