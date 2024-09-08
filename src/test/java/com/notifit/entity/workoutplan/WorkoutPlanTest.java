@@ -42,13 +42,12 @@ class WorkoutPlanTest {
                 WorkoutSet.of(setNumber, reps, weight, unit, memo, workout);
 
         // when
-        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isCompleted, elapsedTime, member, workoutSet);
+        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isCompleted, elapsedTime, member);
 
         // then
         assertThat(workoutPlan.getScheduleDate()).isEqualTo(scheduleDate);
         assertThat(workoutPlan.isCompleted()).isFalse();
         assertThat(workoutPlan.getElapsedTime()).isEqualTo(elapsedTime);
         assertThat(workoutPlan.getMember()).isEqualTo(member);
-        assertThat(workoutPlan.getWorkoutSet()).isEqualTo(workoutSet);
     }
 }

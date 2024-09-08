@@ -41,13 +41,12 @@ class WorkoutRoutineTest {
 
 
         // when
-        WorkoutRoutine workoutRoutine = WorkoutRoutine.of(routineName, lastWorkoutTime, member, workoutSet);
+        WorkoutRoutine workoutRoutine = WorkoutRoutine.of(routineName, lastWorkoutTime, member);
 
         // then
         assertThat(workoutRoutine.getRoutineName()).isEqualTo(routineName);
         assertThat(workoutRoutine.getLastWorkoutTime()).isEqualTo(lastWorkoutTime);
         assertThat(workoutRoutine.getMember()).isEqualTo(member);
-        assertThat(workoutRoutine.getWorkoutSet()).isEqualTo(workoutSet);
     }
 
 }
