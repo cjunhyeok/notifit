@@ -30,7 +30,7 @@ public class PlanSet {
         this.workoutSet = workoutSet;
     }
 
-    public PlanSet of(WorkoutPlan workoutPlan, WorkoutSet workoutSet) {
+    public static PlanSet of(WorkoutPlan workoutPlan, WorkoutSet workoutSet) {
         return new PlanSet(workoutPlan,  workoutSet);
     }
 }
