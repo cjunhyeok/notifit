@@ -7,7 +7,6 @@ import com.notifit.exception.CustomException;
 import com.notifit.exception.ErrorCode;
 import com.notifit.repository.MemberRepository;
 import com.notifit.service.utils.PasswordEncoder;
-import com.notifit.service.utils.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    private final SessionManager sessionManager;
 
     @Transactional
     public Long join(JoinRequest request) {
@@ -59,6 +57,6 @@ public class MemberService {
             throw new CustomException(ErrorCode.PASSWORD_NOT_MATCH);
         }
 
-        return sessionManager.createSession(findMember.getUsername());
+        return findMember.getUsername();
     }
 }

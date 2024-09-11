@@ -6,8 +6,8 @@ import com.notifit.controller.dtos.member.JoinResponse;
 import com.notifit.controller.dtos.member.LoginRequest;
 import com.notifit.service.MemberService;
 import com.notifit.service.utils.SessionConst;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,12 +31,12 @@ public class MemberController {
 
     @PostMapping("/api/login")
     public Result login(@RequestBody LoginRequest request,
-                        HttpServletResponse response) {
+                        HttpServletRequest servletRequest) {
 
-        String sessionId = memberService.login(request);
+        String loginUsername = memberService.login(request);
 
-        Cookie sessionCookie = new Cookie(SessionConst.SESSION_ID, sessionId);
-        response.addCookie(sessionCookie);
+        HttpSession session = servletRequest.getSession(true);
+        session.setAttribute(SessionConst.SESSION_ID, loginUsername);
 
         return new Result(true, "로그인이 완료되었습니다.");
     }
