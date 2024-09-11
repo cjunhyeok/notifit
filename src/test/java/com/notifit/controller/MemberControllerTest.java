@@ -4,20 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.notifit.controller.dtos.member.JoinRequest;
 import com.notifit.controller.dtos.member.LoginRequest;
 import com.notifit.service.utils.SessionConst;
-import com.notifit.service.utils.SessionManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -28,8 +26,6 @@ class MemberControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private SessionManager sessionManager;
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
@@ -86,9 +82,8 @@ class MemberControllerTest {
 
         // then
         perform.andExpect(MockMvcResultMatchers.status().isOk());
-        String sessionId = perform.andReturn().getResponse().getCookie(SessionConst.SESSION_ID).getValue();
-        Map<String, Object> sessionStore = sessionManager.getSessionStore();
-        String usernameBySession = (String) sessionStore.get(sessionId);
-        assertThat(usernameBySession).isEqualTo(username);
+        MockHttpSession session = (MockHttpSession) perform.andReturn().getRequest().getSession();
+        assertThat(session).isNotNull();  // 세션이 null이 아닌지 확인
+        assertThat(session.getAttribute(SessionConst.SESSION_ID)).isEqualTo(username);  // 세션에 저장된 값 검증
     }
 }

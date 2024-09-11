@@ -72,10 +72,10 @@ public class MemberServiceTest {
                 .build();
 
         // when
-        String sessionId = memberService.login(loginRequest);
+        String loginUsername = memberService.login(loginRequest);
 
         // then
-        assertThat(sessionId).isNotNull();
+        assertThat(loginUsername).isEqualTo(username);
     }
 
     private JoinRequest createJoinRequest(String username, String password) {
