@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
@@ -28,11 +27,10 @@ class WorkoutPlanRepositoryTest {
         // given
         LocalDate scheduleDate = LocalDate.now();
         boolean isComplete = false;
-        Duration elapsedTime = Duration.ofSeconds(90);
         String username = "username";
         Member member = createMember(username);
         Member savedMember = memberRepository.save(member);
-        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isComplete, elapsedTime, savedMember);
+        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isComplete, savedMember);
 
         // when
         WorkoutPlan savedWorkoutPlan = workoutPlanRepository.save(workoutPlan);
@@ -40,7 +38,6 @@ class WorkoutPlanRepositoryTest {
         // then
         assertThat(savedWorkoutPlan.getId()).isNotNull();
         assertThat(savedWorkoutPlan.getScheduleDate()).isEqualTo(scheduleDate);
-        assertThat(savedWorkoutPlan.getElapsedTime()).isEqualTo(elapsedTime);
         assertThat(savedWorkoutPlan.getMember()).isEqualTo(member);
     }
 

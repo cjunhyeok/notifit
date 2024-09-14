@@ -8,7 +8,6 @@ import com.notifit.entity.workoutset.enums.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
@@ -21,7 +20,6 @@ class WorkoutPlanTest {
         // given
         LocalDate scheduleDate = LocalDate.now();
         boolean isCompleted = false;
-        Duration elapsedTime = Duration.ofHours(1);
 
         String username = "username";
         String password = "password";
@@ -42,12 +40,11 @@ class WorkoutPlanTest {
                 WorkoutSet.of(setNumber, reps, weight, unit, memo, workout);
 
         // when
-        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isCompleted, elapsedTime, member);
+        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isCompleted, member);
 
         // then
         assertThat(workoutPlan.getScheduleDate()).isEqualTo(scheduleDate);
         assertThat(workoutPlan.isCompleted()).isFalse();
-        assertThat(workoutPlan.getElapsedTime()).isEqualTo(elapsedTime);
         assertThat(workoutPlan.getMember()).isEqualTo(member);
     }
 }
