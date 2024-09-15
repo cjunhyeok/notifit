@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
@@ -37,10 +38,11 @@ class PlanSetRepositoryTest {
     void saveTest() {
         LocalDate scheduleDate = LocalDate.now();
         boolean isComplete = false;
+        Duration elapsedTime = Duration.ofSeconds(90);
         String username = "username";
         Member member = createMember(username);
         Member savedMember = memberRepository.save(member);
-        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isComplete, savedMember);
+        WorkoutPlan workoutPlan = WorkoutPlan.of(scheduleDate, isComplete, elapsedTime, savedMember);
         WorkoutPlan savedWorkoutPlan = workoutPlanRepository.save(workoutPlan);
 
         BodyPart bodyPart = BodyPart.CHEST;
