@@ -1,7 +1,7 @@
-package com.notifit.entity.routineset;
+package com.notifit.entity.routineworkout;
 
+import com.notifit.entity.workout.Workout;
 import com.notifit.entity.workoutroutine.WorkoutRoutine;
-import com.notifit.entity.workoutset.WorkoutSet;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RoutineSet {
+public class RoutineWorkout {
 
     @Id
     @GeneratedValue
@@ -22,15 +22,15 @@ public class RoutineSet {
     private WorkoutRoutine workoutRoutine;
 
     @ManyToOne
-    @JoinColumn(name = "workout_set_id")
-    private WorkoutSet workoutSet;
+    @JoinColumn(name = "workout_id")
+    private Workout workout;
 
-    private RoutineSet(WorkoutRoutine workoutRoutine, WorkoutSet workoutSet) {
+    private RoutineWorkout(WorkoutRoutine workoutRoutine, Workout workout) {
         this.workoutRoutine = workoutRoutine;
-        this.workoutSet = workoutSet;
+        this.workout = workout;
     }
 
-    public static RoutineSet of(WorkoutRoutine workoutRoutine, WorkoutSet workoutSet) {
-        return new RoutineSet(workoutRoutine,  workoutSet);
+    public static RoutineWorkout of(WorkoutRoutine workoutRoutine, Workout workout) {
+        return new RoutineWorkout(workoutRoutine,  workout);
     }
 }
