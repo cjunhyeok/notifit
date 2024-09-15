@@ -1,7 +1,7 @@
 package com.notifit.repository;
 
 import com.notifit.entity.member.Member;
-import com.notifit.entity.planset.PlanSet;
+import com.notifit.entity.planworkout.PlanWorkout;
 import com.notifit.entity.workout.Workout;
 import com.notifit.entity.workout.enums.BodyPart;
 import com.notifit.entity.workoutplan.WorkoutPlan;
@@ -20,10 +20,10 @@ import static org.assertj.core.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
-class PlanSetRepositoryTest {
+class PlanWorkoutRepositoryTest {
 
     @Autowired
-    private PlanSetRepository planSetRepository;
+    private PlanWorkoutRepository planWorkoutRepository;
     @Autowired
     private MemberRepository memberRepository;
     @Autowired
@@ -56,17 +56,17 @@ class PlanSetRepositoryTest {
         Unit unit = Unit.KG;
         String memo = "topSet";
         WorkoutSet workoutSet = WorkoutSet.of(setNumber, reps, weight, unit, memo, savedWorkout);
-        WorkoutSet savedWorkoutSet = workoutSetRepository.save(workoutSet);
+        workoutSetRepository.save(workoutSet);
 
-        PlanSet planSet = PlanSet.of(savedWorkoutPlan, savedWorkoutSet);
+        PlanWorkout planWorkout = PlanWorkout.of(savedWorkoutPlan, savedWorkout);
 
         // when
-        PlanSet savedPlanSet = planSetRepository.save(planSet);
+        PlanWorkout savedPlanWorkout = planWorkoutRepository.save(planWorkout);
 
         // then
-        assertThat(savedPlanSet.getId()).isNotNull();
-        assertThat(savedPlanSet.getWorkoutPlan()).isEqualTo(workoutPlan);
-        assertThat(savedPlanSet.getWorkoutSet()).isEqualTo(workoutSet);
+        assertThat(savedPlanWorkout.getId()).isNotNull();
+        assertThat(savedPlanWorkout.getWorkoutPlan()).isEqualTo(workoutPlan);
+        assertThat(savedPlanWorkout.getWorkout()).isEqualTo(savedWorkout);
     }
 
     private Member createMember(String username) {
